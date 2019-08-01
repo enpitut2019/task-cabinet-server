@@ -38,11 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'livesync',
+    'rest_framework',
+     'rest_framework_swagger',
 ]
 
 MIDDLEWARE_CLASSES = (
     'livesync.core.middleware.DjangoLiveSyncMiddleware',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
