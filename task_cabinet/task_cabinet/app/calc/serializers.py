@@ -6,5 +6,4 @@ class ClacSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calc
         fields = ('id', 'first_number', 'second_number', 'calc')
-    def get_add_result(self, instance):
-        return 
+
