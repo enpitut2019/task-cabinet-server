@@ -3,6 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-class TaskGet(APIView):
+class TaskView(APIView):
     def get(self, request, format=None):
-        return Response("pong")
+        user = request.GET['username']
+        age = request.GET['age']
+        return Response("{}-{}".format(user, age))

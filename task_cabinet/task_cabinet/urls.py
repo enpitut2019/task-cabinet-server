@@ -18,11 +18,19 @@ from django.urls import path
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
 from .app import pingpong
+
+from .app.calc import views
+
 schema_view = get_swagger_view(title='API Lists')
 
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'calc', views.ClacViewSet)
+from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^docs', schema_view),
-    url(r'api/get',pingpong.TaskGet.as_view(),name='task-get')
+    url(r'api/get2',pingpong.TaskView.as_view(),name='task-view'),
+    url(r'api/get2', include(router.urls),name='calc-view'),
 ]

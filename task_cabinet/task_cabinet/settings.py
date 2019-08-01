@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'livesync',
     'rest_framework',
      'rest_framework_swagger',
+    'task_cabinet'
 ]
 
 MIDDLEWARE_CLASSES = (
