@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from .models import Calc
 
-
-class ClacSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Calc
-        fields = ('id', 'first_number', 'second_number', 'calc')
+class ClacSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    email = serializers.EmailField()
+    content = serializers.CharField(max_length=200)
+    created = serializers.DateTimeField()
