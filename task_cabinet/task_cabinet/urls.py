@@ -1,36 +1,33 @@
-"""task_cabinet URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
-from .app import pingpong
-
-from .app.calc import views
-
-schema_view = get_swagger_view(title='API Lists')
-
-from rest_framework.routers import DefaultRouter
-router = DefaultRouter()
-router.register(r'calc', views.ClacViewSet)
+from .app.pingpong.urls import router as ping_pong_router
+from .app.task.url import router as task_router
+# from .app.user.urls import router as user_router
+from .app.user.views import UserCreateAPIView
+from rest_framework.routers import DefaultRouter,SimpleRouter
 from django.conf.urls import url, include
+# from draft_todo import views as dview
+from task_draft import views as tview
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from task_draft.views import TaskViewSet
+from user_draft.views import UserViewSet
+
+schema_view = get_swagger_view(title='API Lists For TaskCabinet')
+
+router = SimpleRouter()
+router2 = DefaultRouter()
+router2.register(r'task', TaskViewSet, base_name='task')
+router.registry.extend(router2.registry)
+router3 = DefaultRouter()
+router3.register(r'user', UserViewSet, base_name='user')
+router.registry.extend(router3.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^docs', schema_view),
-    url(r'api/get2',pingpong.TaskView.as_view(),name='task-view'),
-    url(r'api/get2', include(router.urls),name='calc-view'),
+    url(r'api/', include(router.urls), name='api'),
+    # url(r'api-user', UserCreateAPIView.as_view(), name='api-user'),
+    # url(r'draft_user/create_user', dview.TaskUserCreateAPIView.as_view(), name='dcu'),
 ]
