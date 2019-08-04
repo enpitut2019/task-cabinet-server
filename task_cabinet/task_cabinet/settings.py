@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'livesync',
     'rest_framework',
      'rest_framework_swagger',
+    'drf_yasg',
     'task_cabinet',
     'task_draft'
 ]
