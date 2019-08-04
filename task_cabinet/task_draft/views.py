@@ -2,6 +2,13 @@ from task_cabinet.serializers import TaskSerializer
 from task_cabinet.models import Task
 from rest_framework.response import Response
 from rest_framework import viewsets, status
+from rest_framework.generics import CreateAPIView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from task_cabinet.models import TodoItemAsAuth
+from task_cabinet.serializers import TaskAuthAsAuthUserCreateSerializer
+from rest_framework.viewsets import ModelViewSet
+from task_cabinet.models import AuthUser
+from task_cabinet.serializers import TaskAuthUserSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -37,3 +44,16 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     # def destroy(self, request, pk=None):
     #     pass
+
+
+class TaskAuthUserAPIView(ModelViewSet):
+    queryset = AuthUser.objects.all()
+    serializer_class = TaskAuthUserSerializer
+
+
+class TaskAuthUserCreateTodoItemAPIView(LoginRequiredMixin, CreateAPIView):
+    queryset = TodoItemAsAuth.objects.all()
+    serializer_class = TaskAuthAsAuthUserCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

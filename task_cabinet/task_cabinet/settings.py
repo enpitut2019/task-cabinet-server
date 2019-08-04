@@ -39,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'livesync',
     'rest_framework',
-    'rest_framework_swagger',
     'drf_yasg',
     'task_cabinet',
     'task_draft',
     'user_draft',
 ]
+
+AUTH_USER_MODEL = 'task_cabinet.AuthUser'
 
 MIDDLEWARE_CLASSES = (
     'livesync.core.middleware.DjangoLiveSyncMiddleware',
