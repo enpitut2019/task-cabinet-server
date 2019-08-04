@@ -1,5 +1,5 @@
-from task_cabinet.models.task import Task
-from .serializers import TaskSerializer
+from task_cabinet.serializers import TaskSerializer
+from task_cabinet.models import Task
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 

@@ -1,5 +1,5 @@
-from task_cabinet.models.user import User
-from task_cabinet.serializers.user import UserSerializer
+from task_cabinet.models import User
+from task_cabinet.serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 
