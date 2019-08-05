@@ -5,7 +5,7 @@
 
 * how to setup?
 #+begin_src python
-git clone https://github.com/enpitut2019/task-cabinet-server -b servers/mokke
+git clone https://github.com/enpitut2019/task-cabinet-server -b servers/mokke2
 cd task-cabinet-server
 python -m venv venv
 source venv venv
