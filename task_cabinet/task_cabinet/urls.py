@@ -54,7 +54,7 @@ urlpatterns = [
     # url(r'api-user', UserCreateAPIView.as_view(), name='api-user'),
     # url(r'draft_user/create_user', dview.TaskUserCreateAPIView.as_view(), name='dcu'),
     # tcwaview
-    url(r'draft_user/create_user',
-        tcwaview.AuthUserCreateAPIView.as_view(),
-        name='tcwaviewauc'),
+    path('/create_user',
+         tcwaview.AuthUserCreateAPIView.as_view(),
+         name='tcwaviewauc'),
 ]
