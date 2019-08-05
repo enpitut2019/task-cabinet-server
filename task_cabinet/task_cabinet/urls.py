@@ -4,7 +4,7 @@ from rest_framework_swagger.views import get_swagger_view
 from .app.pingpong.urls import router as ping_pong_router
 from .app.task.url import router as task_router
 from .app.user.views import UserCreateAPIView
-from rest_framework.routers import DefaultRouter,SimpleRouter
+from rest_framework.routers import DefaultRouter, SimpleRouter
 from django.conf.urls import url, include
 from task_draft import views as tview
 from drf_yasg.views import get_schema_view
@@ -17,6 +17,8 @@ from drf_yasg import openapi
 
 from task_draft.views import TaskViewSet
 from user_draft.views import UserViewSet
+
+from task_cabinet_with_auth import views as tcwaview
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -47,8 +49,12 @@ urlpatterns = [
         name='schema-swagger-ui'),
     url(r'^redoc/$',
         schema_view.with_ui('redoc', cache_timeout=0),
-        name='schema-redoc'), 
+        name='schema-redoc'),
     url(r'api/', include(router.urls), name='api'),
     # url(r'api-user', UserCreateAPIView.as_view(), name='api-user'),
     # url(r'draft_user/create_user', dview.TaskUserCreateAPIView.as_view(), name='dcu'),
+    # tcwaview
+    url(r'draft_user/create_user',
+        tcwaview.AuthUserCreateAPIView.as_view(),
+        name='tcwaviewauc'),
 ]
