@@ -1,0 +1,19 @@
+* Requrement
++ Python > 3.6
++ SQLite3
+
+
+* how to setup?
+#+begin_src python
+git clone https://github.com/enpitut2019/task-cabinet-server -b servers/mokke2
+cd task-cabinet-server
+python -m venv venv
+source venv/bin/activate
+pip install  -r requirement3.txt
+cd task-cabinet
+python manage.py migrate
+python manage.py createsuperuser
+# add you if you are administrator
+python manage.py runserver 0:8000
+# run the server
+#+end_src
